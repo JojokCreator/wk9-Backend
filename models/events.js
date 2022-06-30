@@ -78,10 +78,12 @@ export const updateEvent = async (updatedEvent, id) => {
 			[name_of_event]
 		);
 	}
-	// if (event_host) {
-	//     await query (`UPDATE events SET event_host = $1 WHERE events_id = ${id};`,  //It doesn't like me changing this!!
-	//     [event_host] )
-	// }
+	if (name_of_event_host) {
+		await query(
+			`UPDATE events SET name_of_event_host = $1 WHERE events_id = ${id};`,
+			[name_of_event_host]
+		);
+	}
 
 	if (img_url) {
 		await query(`UPDATE events SET img_url = $1 WHERE events_id = ${id};`, [
@@ -150,13 +152,13 @@ export const updateEvent = async (updatedEvent, id) => {
 export const getEventById = async (id) => {
 	const data = await query(`SELECT * FROM events WHERE events_id = $1;`, [id]);
 	return data.rows;
-  };
-  
-  //Delete an event by id (DELETE)
-  export async function deleteEvent(id) {
+};
+
+//Delete an event by id (DELETE)
+export async function deleteEvent(id) {
 	const data = await query(
-	  `DELETE FROM events WHERE events_id = $1 RETURNING *`,
-	  [Number(id)]
+		`DELETE FROM events WHERE events_id = $1 RETURNING *`,
+		[Number(id)]
 	);
 	return data.rows;
-  }
+}

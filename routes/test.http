@@ -71,4 +71,4 @@ content-type: application/json
     }
 
 ###
-DELETE http://localhost:5000/users/9
+DELETE http://localhost:5000/users/5
