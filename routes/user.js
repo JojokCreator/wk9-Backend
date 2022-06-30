@@ -5,7 +5,11 @@ import {
   createUser,
   deleteUser,
   updateUser,
+  getUserById,
 } from "../models/user.js";
+
+
+
 
 const usersRouter = express.Router();
 //GET ALL USERS (GET)
@@ -13,6 +17,14 @@ usersRouter.get("/users", async (req, res) => {
   const result = await getUsers(); //models users
   res.json({ Success: true, Payload: result });
 });
+
+// //GET USER BY ID
+usersRouter.get("/users/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const result = await getUserById(id);
+  res.json({ Success: true, Payload: result });
+});
+
 //CREATE A NEW USER (POST)
 usersRouter.post(
   "/users",

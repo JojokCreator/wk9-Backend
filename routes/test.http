@@ -4,7 +4,7 @@ GET http://localhost:5000/events/
 ###
 GET http://localhost:5000/events/2
 ###
-DELETE http://localhost:5000/events/27
+DELETE http://localhost:5000/events/6
 
 ###
 POST http://localhost:5000/events/
@@ -27,24 +27,12 @@ content-type: application/json
       "userAttending": 1
     }
 ###
-Patch http://localhost:5000/events/
+Patch http://localhost:5000/events/2g
 content-type: application/json
 
     {
-      "name_of_event": "This is 2",
-      "event_host": 1,
-      "start_time": "2004-10-19T09:23:54.000Z",
-      "end_time": "2004-10-19T12:23:54.000Z",
-      "description": "Meetup for Everyone",
-      "cost": 0,
-      "house_number": "factory",
-      "street_address": "birmingham",
-      "town": "birmingham",
-      "region": "birmingham",
-      "postcode": "birmingham",
-      "lat": "51.5073509",
-      "long": "-0.1277583",
-      "userAttending": 1
+      "img_url": "http://localhost:5000/images/1656587398723.png"
+
     }
 
 //Test Users
@@ -83,4 +71,4 @@ content-type: application/json
     }
 
 ###
-DELETE http://localhost:5000/users/15
+DELETE http://localhost:5000/users/9

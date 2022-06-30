@@ -1,11 +1,8 @@
 import { query } from "../db/index.js";
 import bcrypt from "bcrypt";
 
-//Regular function format
-// export async function getUsers(){
-//     return [{userID : 1 , Name : "Joe"},
-//     {userID : 2 , Name : "Bob"}]
-// }
+
+
 
 //Selects all users from the users table (GET)
 export const getUsers = async () => {
@@ -128,6 +125,12 @@ export const updateUser = async (updatedUser, id) => {
   }
 };
 //^^Doesn't return the changes of the new user (Check the browser version or the database)
+
+//Search by user ID (GET)
+export const getUserById = async (id) => {
+	const data = await query(`SELECT * FROM users WHERE user_id = $1;`, [id]);
+	return data.rows;
+  };
 
 //Delete user from the users table
 export const deleteUser = async (id) => {

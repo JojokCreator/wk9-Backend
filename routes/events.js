@@ -7,8 +7,36 @@ import {
   updateEvent,
   getEventById,
 } from "../models/events.js";
+import multer from "multer";
+import path from 'path'
+
 
 const eventsRouter = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb)=>{
+      cb(null, 'images/')
+  },
+
+  filename: (req, file, cb) => {
+    console.log(file)
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({storage: storage})
+
+//POST REQUEST FOR IMAGE STORAGE
+eventsRouter.post("/events/upload", upload.single('image_url'), (req, res)=> {
+  const file = req.file
+  // if (!file) {
+  //   const error = new Error('Please upload a file')
+  //   error.httpStatusCode = 400
+  //   return next(error)
+  // }
+  res.json({ Success: true, Payload: file });
+})
+
 // GET ALL EVENTS (GET)
 eventsRouter.get("/events", async (req, res) => {
   const result = await getEvents();
