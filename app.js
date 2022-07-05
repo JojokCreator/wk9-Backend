@@ -5,6 +5,8 @@ import eventsRouter from "./routes/events.js";
 import authRouter from "./routes/auth.js";
 import cookieParser from "cookie-parser";
 
+
+ //deploy
 const app = express();
 //Middleware that parses the data
 app.use(express.json());
