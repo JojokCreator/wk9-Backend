@@ -22,7 +22,12 @@ authRouter.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Incorrect password" });
     // JSON Web Token
     let tokens = jwtTokens(user.rows[0]);
-    res.cookie("refresh_token", tokens.refreshToken, { httpOnly: true });
+    res.cookie("refresh_token", tokens.refreshToken, { 
+      httpOnly: true , 
+      domain: "https://front-end-bootcamper-social.netlify.app",
+      secure: true,
+      sameSite:'none',
+    });
     res.json(tokens);
   } catch (error) {
     res.status(401).json({ error: error.message });
@@ -39,7 +44,7 @@ authRouter.get("/refresh_token", (req, res) => {
       let tokens = jwtTokens(user);
       res.cookie("refresh_token", tokens.refreshToken, { 
       httpOnly: true , 
-      // domain: "https://front-end-bootcamper-social.netlify.app",
+      domain: "https://front-end-bootcamper-social.netlify.app",
       secure: true,
       sameSite:'none',
     });
