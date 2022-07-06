@@ -39,7 +39,7 @@ authRouter.get("/refresh_token", (req, res) => {
       let tokens = jwtTokens(user);
       res.cookie("refresh_token", tokens.refreshToken, { 
       httpOnly: true , 
-      domain: `${URL}`,
+      domain: "https://front-end-bootcamper-social.netlify.app",
       secure: true,
       sameSite:'none',
     });
