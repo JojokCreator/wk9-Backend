@@ -37,7 +37,12 @@ authRouter.get("/refresh_token", (req, res) => {
     jwt.verify(refreshToken, process.env.REFRESH_SECRET, (error, user) => {
       if (error) return res.status(403).json({ error: error.message });
       let tokens = jwtTokens(user);
-      res.cookie("refresh_token", tokens.refreshToken, { httpOnly: true });
+      res.cookie("refresh_token", tokens.refreshToken, { 
+      httpOnly: true , 
+      domain: `${URL}`,
+      secure: true,
+      sameSite:'none',
+    });
       res.json(tokens);
     });
   } catch (error) {

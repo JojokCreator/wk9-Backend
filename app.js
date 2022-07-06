@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000;
 app.use('/images', express.static('images'))
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://front-end-bootcamper-social.netlify.app"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", `${URL}`); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
