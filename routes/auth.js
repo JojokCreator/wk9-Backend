@@ -24,7 +24,7 @@ authRouter.post("/login", async (req, res) => {
     let tokens = jwtTokens(user.rows[0]);
     res.cookie("refresh_token", tokens.refreshToken, { 
       httpOnly: true , 
-      domain: "https://front-end-bootcamper-social.netlify.app",
+      // domain: "https://front-end-bootcamper-social.netlify.app",
       secure: true,
       sameSite:'none',
     });
@@ -44,7 +44,7 @@ authRouter.get("/refresh_token", (req, res) => {
       let tokens = jwtTokens(user);
       res.cookie("refresh_token", tokens.refreshToken, { 
       httpOnly: true , 
-      domain: "https://front-end-bootcamper-social.netlify.app",
+      // domain: "https://front-end-bootcamper-social.netlify.app",
       secure: true,
       sameSite:'none',
     });
