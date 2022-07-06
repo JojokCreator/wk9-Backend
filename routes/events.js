@@ -56,6 +56,10 @@ eventsRouter.post(
 		.not()
 		.isEmpty()
 		.withMessage("Event name cannot be blank"),
+	body("name_of_event_host")
+		.not()
+		.isEmpty()
+		.withMessage("Host name cannot be blank"),
 	body("long")
 		.not()
 		.isEmpty()
