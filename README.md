@@ -9,7 +9,7 @@ App is deployed [here](https://front-end-bootcamper-social.netlify.app/)
 Clone the project
 
 ```bash
-  git clone https://github.com/SchoolOfCode/w9_backend-project-joe-klakus-the-wailers.git
+  git clone https://github.com/SchoolOfCode/w9_backend-project.git
 ```
 
 Go to the project directory
