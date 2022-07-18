@@ -3,7 +3,7 @@
 
 This is the Backend of our Mid-way project for School Of Code, we were presented with the task of creating an app that would help a bootcamper through this experience. After some discussion we decided to create an APP centered around meeting other bootcampers outside of Bootcamp Hours.
 
-As of 28/6/2022 the app is not deployed and so you will have to run it locally to view.
+App is deployed [here](https://front-end-bootcamper-social.netlify.app/)
 ## To Run Locally:
 
 Clone the project
@@ -49,4 +49,91 @@ To run tests, run the following command
 - [@JojokCreator](https://github.com/JojokCreator)
 - [@Musy88](https://github.com/Musy88)
 - [@danielknight261](https://github.com/danielknight261)
+
+
+## Authentication
+
+The authentication is provided using JSON Web Tokens the expiry times for the tokens can be changed in the utils/jwt.helpers.js file. When logged in the user receives a short lived access token that is exchanged with a refresh token automatically that keeps the user logged in. The access token is decryptable to allow access to the users email and user_id.
+
+## API Reference
+#### Auth Routes
+```http
+  POST localhost:3000/login
+```
+
+| Route     | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `/login` | `POST` | POSTs the username and password to the database and receieves an access token if correct. |
+
+#### GET 
+
+```http
+  POST localhost:3000/refresh_token
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `/refresh_token`      | `GET` | GETs the receieves a refresh token if correct. |
+
+#### DELETE 
+
+```http
+  POST localhost:3000/refresh_token
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `/refresh_token`      | `DELETE` | DELETEs the refresh token from the database (logs the user out)|
+
+
+#### GET ALL USERS
+
+```http
+  GET localhost:3000/users
+```
+
+| Route     | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `/users` | `GET` | GETs all the users in the database |
+
+#### POST 
+
+```http
+  POST localhost:3000/users
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `/users`      | `POST` | Creates a new user |
+
+#### PATCH 
+
+```http
+  PATCH localhost:3000/users/:id
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `/users/:id`      | `PATCH` | Updates a user with the designated id |
+
+#### DELETE
+
+```http
+  DELETE localhost:3000/users/:id
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `/users/:id`      | `DELETE` | Delete the user with the designated id |
+
+
+#### Events Routes
+```http
+ For events paths use the above references but with /events instead of /users.
+```
+
+
+
+
+
 
