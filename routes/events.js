@@ -27,7 +27,7 @@ const eventsRouter = express.Router();
 
 // const upload = multer({ storage: storage });
 
-const s3 = new AWS.S3()
+const s3 = new S3Client();
 
 const uploadS3 = multer({
   storage: multerS3({
