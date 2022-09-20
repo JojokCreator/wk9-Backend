@@ -9,7 +9,7 @@ import {
 } from "../models/events.js";
 import multer from "multer";
 import multerS3 from 'multer-s3';
-import { S3 } from 'aws-sdk';
+import S3 from 'aws-sdk';
 import path from "path";
 
 const eventsRouter = express.Router();
