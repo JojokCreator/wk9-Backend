@@ -51,7 +51,12 @@ eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => 
 	//   error.httpStatusCode = 400
 	//   return next(error)
 	// }
-	res.json({ Success: true, Payload: file });
+	const url = s3.getSignedUrl('getObject', {
+		Bucket: 'cyclic-erin-python-wig-eu-west-2',
+		Key: file.key,
+		Expires: signedUrlExpireSeconds
+})
+	res.json({ Success: true, Payload: url });
 });
 
 // GET ALL EVENTS (GET)
