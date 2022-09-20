@@ -32,7 +32,7 @@ const s3 = new aws.S3({
 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
-const.uploadS3 = multer{
+const uploadS3 = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'cyclic-erin-python-wig-eu-west-2',
