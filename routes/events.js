@@ -33,7 +33,7 @@ const uploadS3 = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'cyclic-erin-python-wig-eu-west-2',
-		acl: 'public-read',
+		// acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname});
     },
