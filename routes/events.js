@@ -9,7 +9,7 @@ import {
 } from "../models/events.js";
 import multer from "multer";
 import multerS3 from 'multer-s3';
-import { S3Client } from '@aws-sdk/client-s3';
+import AWS from "aws-sdk";
 import path from "path";
 
 const eventsRouter = express.Router();
@@ -27,7 +27,7 @@ const eventsRouter = express.Router();
 
 // const upload = multer({ storage: storage });
 
-const s3 = new S3Client();
+const s3 = new AWS.S3()
 
 const uploadS3 = multer({
   storage: multerS3({
