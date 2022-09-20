@@ -27,13 +27,7 @@ const eventsRouter = express.Router();
 
 // const upload = multer({ storage: storage });
 
-const s3 = new S3Client({
-	credentials: {
-		accessKeyId: AWS_ACCESS_KEY_ID,
-		secretAccessKey: AWS_SECRET_ACCESS_KEY
-	},
-	region: AWS_REGION
-});
+const s3 = new S3Client();
 
 const uploadS3 = multer({
   storage: multerS3({
