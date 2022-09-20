@@ -8,25 +8,46 @@ import {
 	getEventById,
 } from "../models/events.js";
 import multer from "multer";
+import multerS3 from 'multer-s3';
+import aws from 'aws-sdk';
 import path from "path";
 
 const eventsRouter = express.Router();
 
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, "images/");
-	},
+// const storage = multer.diskStorage({
+// 	destination: (req, file, cb) => {
+// 		cb(null, "images/");
+// 	},
 
-	filename: (req, file, cb) => {
-		console.log(file);
-		cb(null, Date.now() + path.extname(file.originalname));
-	},
-});
+// 	filename: (req, file, cb) => {
+// 		console.log(file);
+// 		cb(null, Date.now() + path.extname(file.originalname));
+// 	},
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+
+const s3 = new aws.S3({
+	accessKeyId: process.env.AWS_ACCESS_KEY,
+	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+})
+
+const.uploadS3 = multer{
+  storage: multerS3({
+    s3: s3,
+    bucket: 'cyclic-erin-python-wig-eu-west-2',
+		acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname))
+    }
+  })
+})
 
 //POST REQUEST FOR IMAGE STORAGE
-eventsRouter.post("/events/upload", upload.single("image_url"), (req, res) => {
+eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => {
 	const file = req.file;
 	// if (!file) {
 	//   const error = new Error('Please upload a file')
