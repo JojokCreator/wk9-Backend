@@ -44,19 +44,19 @@ const uploadS3 = multer({
 })
 
 //POST REQUEST FOR IMAGE STORAGE
-eventsRouter.post("/events/upload", uploadS3.single("image_url"), async (req, res) => {
+eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => {
 	const file = req.file;
 	// if (!file) {
 	//   const error = new Error('Please upload a file')
 	//   error.httpStatusCode = 400
 	//   return next(error)
 	// }
-	const url = await s3.getObject({
+	const url = s3.getSignedUrl('getObject', {
 		Bucket: 'cyclic-erin-python-wig-eu-west-2',
 		Key: file.key,
-}).promise();
-
-	res.json({ Success: true, Payload: url.Body });
+		expires: 86400,
+})
+	res.json({ Success: true, Payload: url });
 });
 
 // GET ALL EVENTS (GET)
