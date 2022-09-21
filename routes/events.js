@@ -54,7 +54,7 @@ eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => 
 	const url = s3.getSignedUrl('getObject', {
 		Bucket: 'cyclic-erin-python-wig-eu-west-2',
 		Key: file.key,
-		expires: 86400,
+		Expires: 86400,
 })
 	res.json({ Success: true, Payload: url });
 });
