@@ -56,7 +56,7 @@ eventsRouter.post("/events/upload", uploadS3.single("image_url"), async (req, re
 		Key: file.key,
 }).promise();
 
-	res.json({ Success: true, Payload: url.Body.toString('utf-8') });
+	res.json({ Success: true, Payload: url.Body });
 });
 
 // GET ALL EVENTS (GET)
