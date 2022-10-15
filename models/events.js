@@ -160,5 +160,5 @@ export async function deleteEvent(id) {
 		`DELETE FROM events WHERE events_id = $1 RETURNING *`,
 		[Number(id)]
 	);
-	return data.rows;
+	return data.rows;a1
 }

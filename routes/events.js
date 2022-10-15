@@ -45,6 +45,7 @@ const uploadS3 = multer({
 
 //POST REQUEST FOR IMAGE STORAGE
 eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => {
+	try {
 	const file = req.file;
 	// if (!file) {
 	//   const error = new Error('Please upload a file')
@@ -57,19 +58,30 @@ eventsRouter.post("/events/upload", uploadS3.single("image_url"), (req, res) => 
 		Expires: 86400,
 })
 	res.json({ Success: true, Payload: url });
+} catch (err) {
+  res.status(500).json({ status: 'fail', message: err });
+}
 });
 
 // GET ALL EVENTS (GET)
 eventsRouter.get("/events", async (req, res) => {
+	try {
 	const result = await getEvents();
 	res.json({ Success: true, Payload: result });
+} catch (err) {
+  res.status(500).json({ status: 'fail', message: err });
+}
 });
 
 // //GET EVENT BY ID
 eventsRouter.get("/events/:id", async (req, res) => {
+	try {
 	const id = Number(req.params.id);
 	const result = await getEventById(id);
 	res.json({ Success: true, Payload: result });
+} catch (err) {
+  res.status(500).json({ status: 'fail', message: err });
+}
 });
 
 // //CREATE A NEW EVENT (POST)
@@ -88,6 +100,7 @@ eventsRouter.post(
 		.isEmpty()
 		.withMessage("Please use the map to select your location"),
 	async (req, res) => {
+		try {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
@@ -95,22 +108,33 @@ eventsRouter.post(
 		const newEvent = req.body;
 		const result = await createEvent(newEvent);
 		res.json({ Success: true, Payload: result });
+	} catch (err) {
+		res.status(500).json({ status: 'fail', message: err });
+	}
 	}
 );
 
 // //UPDATE EVENT DETAILS (PATCH)
 eventsRouter.patch("/events/:id", async (req, res) => {
+	try {
 	const id = Number(req.params.id);
 	const updatedEvent = req.body;
 	const result = await updateEvent(updatedEvent, id);
 	res.json({ Success: true, Payload: result });
+} catch (err) {
+  res.status(500).json({ status: 'fail', message: err });
+}
 });
 
 //DELETE AN EVENT (DELETE)
 
 eventsRouter.delete("/events/:id", async (req, res) => {
+	try {
 	const id = Number(req.params.id);
 	const result = await deleteEvent(id);
 	res.json({ Success: true, Payload: result });
+} catch (err) {
+  res.status(500).json({ status: 'fail', message: err });
+}
 });
 export default eventsRouter;
